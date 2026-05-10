@@ -170,7 +170,6 @@
     }
 
     .convidado-numero { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--marrom-claro); margin-bottom: 16px; }
-
     .campo-label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-claro); margin-bottom: 6px; }
 
     .campo-input {
@@ -330,7 +329,6 @@
 <body>
 
 <script>
-  // ════ SUBSTITUA PELA URL DO SEU APPS SCRIPT ════
   const API_URL = 'https://script.google.com/macros/s/AKfycbxFGDs1mXboCAEtuDqNpoqLHWFu-R9b8oSwID1OrutOPPo0Tg9zMSYBiBrn9W9hpHo_7w/exec';
 </script>
 
@@ -400,7 +398,7 @@
       <p class="msg-sucesso-titulo">Presença Confirmada!</p>
       <p style="color:var(--texto-claro); font-size:15px; line-height:1.8;">
         Que alegria! Você receberá um e-mail de confirmação em breve.<br>
-        Nos vemos em 24 de julho! 💚
+        Nos vemos em 24 de julho!
       </p>
     </div>
   </div>
@@ -490,27 +488,31 @@
       <p style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--texto-claro); margin-bottom:8px;">Chave Pix</p>
       <div style="display:flex; align-items:center; gap:10px;">
         <code id="chave-pix" style="font-size:12px; color:var(--texto); word-break:break-all; flex:1;">303af744-8973-4a63-b027-76d9bf5dcacd</code>
-        <button onclick="copiarPix()" id="btn-copiar" style="
-          background:var(--verde);
-          color:var(--branco);
-          border:none;
-          padding:8px 14px;
-          font-family:'EB Garamond',serif;
-          font-size:13px;
-          border-radius:2px;
-          cursor:pointer;
-          white-space:nowrap;
-          flex-shrink:0;
-        ">Copiar</button>
+        <button onclick="copiarPix()" id="btn-copiar" style="background:var(--verde); color:var(--branco); border:none; padding:8px 14px; font-family:'EB Garamond',serif; font-size:13px; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">Copiar</button>
       </div>
     </div>
 
     <div class="modal-qr" id="modal-qr-container">
       <p style="color:var(--texto-claro); font-size:13px; padding:20px; text-align:center;">Carregando...</p>
     </div>
-    <p class="modal-instrucao">Abra o aplicativo do seu banco<br>e escaneie o código ou cole a chave Pix 💚</p>
+    <p class="modal-instrucao">Abra o aplicativo do seu banco<br>e escaneie o código ou cole a chave Pix</p>
   </div>
 </div>
+
+<footer>
+  <p>Luiza & Henrique · 24 · 07 · 26</p>
+  <p style="margin-top:6px;">Anella Spazio Eventi · Belo Horizonte, MG</p>
+</footer>
+
+<script>
+  const API_URL_CHECK = typeof API_URL !== 'undefined' ? API_URL : '';
+  let contadorConvidados = 1;
+  let qrCodeUrl = '';
+
+  window.onload = function () {
+    carregarPresentes();
+    carregarQrCode();
+  };
 
   // ── NAVEGAÇÃO ──
   function mudarPagina(pagina, btn) {
@@ -543,39 +545,39 @@
 
   // ── CONFIRMAR PRESENÇA ──
   function confirmarPresenca() {
-  const grupos = document.querySelectorAll('.convidado-grupo');
-  const convidados = [];
-  let valido = true;
+    const grupos = document.querySelectorAll('.convidado-grupo');
+    const convidados = [];
+    let valido = true;
 
-  grupos.forEach(g => {
-    const nome = g.querySelector('.campo-nome').value.trim();
-    const email = g.querySelector('.campo-email').value.trim();
-    if (!nome || !email) { valido = false; return; }
-    convidados.push({ nome, email });
-  });
-
-  if (!valido) {
-    alert('Por favor, preencha o nome e e-mail de todos os convidados.');
-    return;
-  }
-
-  const btn = document.getElementById('btn-confirmar');
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
-
-  const url = API_URL + '?acao=confirmar&convidados=' + encodeURIComponent(JSON.stringify(convidados));
-
-  fetch(url, { mode: 'no-cors' })
-    .then(() => {
-      document.getElementById('form-confirmacao').style.display = 'none';
-      document.getElementById('msg-sucesso').classList.add('visible');
-    })
-    .catch(() => {
-      alert('Erro de conexão. Tente novamente.');
-      btn.disabled = false;
-      btn.textContent = 'Confirmar Presença';
+    grupos.forEach(g => {
+      const nome = g.querySelector('.campo-nome').value.trim();
+      const email = g.querySelector('.campo-email').value.trim();
+      if (!nome || !email) { valido = false; return; }
+      convidados.push({ nome, email });
     });
-}
+
+    if (!valido) {
+      alert('Por favor, preencha o nome e e-mail de todos os convidados.');
+      return;
+    }
+
+    const btn = document.getElementById('btn-confirmar');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    const url = API_URL + '?acao=confirmar&convidados=' + encodeURIComponent(JSON.stringify(convidados));
+
+    fetch(url, { mode: 'no-cors' })
+      .then(() => {
+        document.getElementById('form-confirmacao').style.display = 'none';
+        document.getElementById('msg-sucesso').classList.add('visible');
+      })
+      .catch(() => {
+        alert('Erro de conexão. Tente novamente.');
+        btn.disabled = false;
+        btn.textContent = 'Confirmar Presença';
+      });
+  }
 
   // ── PRESENTES ──
   function carregarPresentes() {
@@ -613,7 +615,6 @@
     return parseFloat(valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   }
 
-  // Evita quebra no onclick com nomes que tenham aspas
   function escapar(str) {
     return str.replace(/'/g, "\\'");
   }
@@ -626,7 +627,7 @@
     if (qrCodeUrl) {
       container.innerHTML = `<img src="${qrCodeUrl}" alt="QR Code Pix">`;
     } else {
-      container.innerHTML = `<p style="color:var(--texto-claro); font-size:13px; padding:20px; text-align:center;">📱<br>QR Code em breve</p>`;
+      container.innerHTML = `<p style="color:var(--texto-claro); font-size:13px; padding:20px; text-align:center;">QR Code em breve</p>`;
     }
     document.getElementById('modal-qr').classList.add('open');
   }
@@ -639,22 +640,21 @@
     if (e.target === this) fecharModal();
   });
 
-function copiarPix() {
-  const chave = document.getElementById('chave-pix').textContent;
-  navigator.clipboard.writeText(chave).then(() => {
-    const btn = document.getElementById('btn-copiar');
-    btn.textContent = 'Copiado!';
-    btn.style.background = 'var(--verde-claro)';
-    setTimeout(() => {
-      btn.textContent = 'Copiar';
-      btn.style.background = 'var(--verde)';
-    }, 2000);
-  }).catch(() => {
-    alert('Chave Pix: 303af744-8973-4a63-b027-76d9bf5dcacd');
-  });
-}
-  
+  // ── COPIAR PIX ──
+  function copiarPix() {
+    const chave = document.getElementById('chave-pix').textContent;
+    navigator.clipboard.writeText(chave).then(() => {
+      const btn = document.getElementById('btn-copiar');
+      btn.textContent = 'Copiado!';
+      btn.style.background = 'var(--verde-claro)';
+      setTimeout(() => {
+        btn.textContent = 'Copiar';
+        btn.style.background = 'var(--verde)';
+      }, 2000);
+    }).catch(() => {
+      alert('Chave Pix: 303af744-8973-4a63-b027-76d9bf5dcacd');
+    });
+  }
 </script>
 </body>
-</html>
 </html>
