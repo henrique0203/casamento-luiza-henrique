@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luiza & Henrique — 24.07.26</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde: #4a6741;
+      --verde-claro: #6b8f61;
+      --marrom: #7a5c3a;
+      --marrom-claro: #c4a882;
+      --bege: #f5f0e8;
+      --bege-escuro: #ede5d5;
+      --texto: #3a2e22;
+      --texto-claro: #7a6a58;
+      --branco: #fdfaf5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--branco);
+      color: var(--texto);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--branco);
+      border-bottom: 1px solid var(--bege-escuro);
+      padding: 24px 20px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(74,103,65,0.06);
+    }
+
+    .header-nomes {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 300;
+      color: var(--verde);
+      letter-spacing: 2px;
+      font-style: italic;
+    }
+
+    .header-data {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--texto-claro);
+      text-transform: uppercase;
+      margin: 6px 0 16px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid var(--bege-escuro);
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      padding: 12px 20px;
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--texto-claro);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav button::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 2px;
+      background: var(--verde);
+      transition: width 0.3s;
+    }
+
+    nav button.active { color: var(--verde); }
+    nav button.active::after { width: 80%; }
+
+    /* ── PÁGINAS ── */
+    .page { display: none; animation: fadeIn 0.5s ease; }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(180deg, var(--bege) 0%, var(--branco) 100%);
+    }
+
+    .ornamento { color: var(--marrom-claro); font-size: 20px; letter-spacing: 8px; margin: 12px 0; }
+
+    .hero-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 10vw, 80px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--verde);
+      line-height: 1.1;
+    }
+
+    .hero-subtitulo {
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--texto-claro);
+      margin: 20px 0;
+    }
+
+    /* ── INFO CARDS ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .info-card {
+      background: var(--bege);
+      border: 1px solid var(--bege-escuro);
+      border-radius: 2px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .info-card-icone { font-size: 24px; margin-bottom: 12px; }
+    .info-card-titulo { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--marrom-claro); margin-bottom: 8px; }
+    .info-card-texto { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--texto); line-height: 1.5; }
+
+    /* ── SEÇÃO ── */
+    .secao { max-width: 680px; margin: 0 auto; padding: 50px 20px; }
+
+    .secao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--verde);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .secao-sub { text-align: center; color: var(--texto-claro); font-size: 14px; margin-bottom: 40px; letter-spacing: 1px; }
+
+    .divisor { display: flex; align-items: center; gap: 12px; margin: 12px 0 32px; justify-content: center; }
+    .divisor::before, .divisor::after { content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--marrom-claro); }
+    .divisor span { color: var(--marrom-claro); font-size: 14px; }
+
+    /* ── FORMULÁRIO ── */
+    .convidado-grupo {
+      background: var(--bege);
+      border: 1px solid var(--bege-escuro);
+      border-radius: 2px;
+      padding: 24px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .convidado-numero { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--marrom-claro); margin-bottom: 16px; }
+
+    .campo-label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-claro); margin-bottom: 6px; }
+
+    .campo-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--bege-escuro);
+      background: var(--branco);
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      color: var(--texto);
+      border-radius: 2px;
+      margin-bottom: 16px;
+      transition: border-color 0.3s;
+      outline: none;
+    }
+
+    .campo-input:focus { border-color: var(--verde-claro); }
+
+    .btn-remover { position: absolute; top: 12px; right: 12px; background: none; border: none; color: var(--marrom-claro); cursor: pointer; font-size: 18px; }
+
+    .btn-adicionar {
+      width: 100%;
+      padding: 14px;
+      background: none;
+      border: 1px dashed var(--marrom-claro);
+      color: var(--marrom);
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 2px;
+      margin: 8px 0 24px;
+      transition: all 0.3s;
+    }
+
+    .btn-adicionar:hover { background: var(--bege); border-color: var(--verde-claro); color: var(--verde); }
+
+    .btn-confirmar {
+      width: 100%;
+      padding: 16px;
+      background: var(--verde);
+      color: var(--branco);
+      border: none;
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+
+    .btn-confirmar:hover { background: var(--verde-claro); }
+    .btn-confirmar:disabled { background: var(--marrom-claro); cursor: not-allowed; }
+
+    /* ── MENSAGEM SUCESSO ── */
+    .msg-sucesso { display: none; text-align: center; padding: 40px 20px; background: var(--bege); border: 1px solid var(--bege-escuro); border-radius: 2px; margin-top: 20px; }
+    .msg-sucesso.visible { display: block; }
+    .msg-sucesso-icone { font-size: 40px; margin-bottom: 16px; }
+    .msg-sucesso-titulo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; color: var(--verde); margin-bottom: 12px; }
+
+    /* ── PRESENTES ── */
+    .presentes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
+
+    .presente-card {
+      background: var(--bege);
+      border: 1px solid var(--bege-escuro);
+      border-radius: 2px;
+      padding: 24px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .presente-card:hover { border-color: var(--verde-claro); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(74,103,65,0.1); }
+
+    .presente-nome { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--texto); margin-bottom: 8px; }
+    .presente-valor { font-size: 13px; color: var(--verde); letter-spacing: 1px; }
+    .presente-btn { margin-top: 12px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--marrom-claro); }
+
+    /* ── MODAL QR ── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(58,46,34,0.6); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+
+    .modal { background: var(--branco); border-radius: 2px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; position: relative; }
+    .modal-fechar { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 22px; color: var(--texto-claro); cursor: pointer; }
+    .modal-titulo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; color: var(--verde); margin-bottom: 8px; }
+    .modal-sub { font-size: 13px; color: var(--texto-claro); margin-bottom: 24px; }
+
+    .modal-qr { width: 200px; height: 200px; margin: 0 auto 20px; background: var(--bege); border: 1px solid var(--bege-escuro); display: flex; align-items: center; justify-content: center; border-radius: 2px; overflow: hidden; }
+    .modal-qr img { width: 100%; height: 100%; object-fit: contain; }
+    .modal-instrucao { font-size: 13px; color: var(--texto-claro); line-height: 1.8; }
+
+    /* ── TURISMO ── */
+    .dica-card { display: flex; gap: 20px; background: var(--bege); border: 1px solid var(--bege-escuro); border-radius: 2px; padding: 24px; margin-bottom: 16px; align-items: flex-start; }
+    .dica-icone { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+    .dica-titulo { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--verde); margin-bottom: 6px; }
+    .dica-texto { font-size: 15px; color: var(--texto-claro); line-height: 1.7; }
+    .dica-tag { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--marrom-claro); border: 1px solid var(--marrom-claro); padding: 2px 8px; border-radius: 2px; margin-bottom: 8px; }
+
+    .loading { text-align: center; padding: 40px; color: var(--texto-claro); font-style: italic; font-size: 18px; }
+
+    footer { text-align: center; padding: 40px 20px; color: var(--texto-claro); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; border-top: 1px solid var(--bege-escuro); }
+
+    @media (max-width: 480px) {
+      nav button { padding: 12px 10px; font-size: 11px; letter-spacing: 1px; }
+      .dica-card { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════ IMPORTANTE: substitua pela URL do seu Apps Script ════ -->
+<script>
+  const API_URL = 'COLE_AQUI_A_URL_DO_SEU_APPS_SCRIPT';
+</script>
+
+<header>
+  <p class="header-nomes">Luiza & Henrique</p>
+  <p class="header-data">24 · 07 · 26 · Belo Horizonte</p>
+  <nav>
+    <button class="active" onclick="mudarPagina('inicio', this)">Início</button>
+    <button onclick="mudarPagina('presentes', this)">Presentes</button>
+    <button onclick="mudarPagina('turismo', this)">Turismo</button>
+  </nav>
+</header>
+
+<!-- ════ INÍCIO ════ -->
+<div id="page-inicio" class="page active">
+  <div class="hero">
+    <p class="ornamento">· · ·</p>
+    <h1 class="hero-titulo">Luiza<br><span style="font-size:0.5em; letter-spacing:6px; font-style:normal;">&amp;</span><br>Henrique</h1>
+    <p class="ornamento">· · ·</p>
+    <p class="hero-subtitulo">Convidam para a cerimônia de seu casamento</p>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-card-icone">📅</div>
+      <p class="info-card-titulo">Data</p>
+      <p class="info-card-texto">Sexta-feira<br>24 de julho de 2026</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icone">⏰</div>
+      <p class="info-card-titulo">Horário</p>
+      <p class="info-card-texto">16h00<br><span style="font-size:14px; color:var(--texto-claro);">Cerimônia e festa no mesmo local</span></p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icone">📍</div>
+      <p class="info-card-titulo">Local</p>
+      <p class="info-card-texto">Anella Spazio Eventi<br><span style="font-size:14px; color:var(--texto-claro);">R. Dep. Feliciano Pena, 87<br>Santa Amélia, BH — MG</span></p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icone">👔</div>
+      <p class="info-card-titulo">Traje</p>
+      <p class="info-card-texto">Social Completo</p>
+    </div>
+  </div>
+
+  <div class="secao">
+    <h2 class="secao-titulo">Confirme sua Presença</h2>
+    <div class="divisor"><span>🌿</span></div>
+    <p class="secao-sub">Aguardamos a sua confirmação com carinho</p>
+
+    <div id="form-confirmacao">
+      <div id="lista-convidados">
+        <div class="convidado-grupo" id="convidado-1">
+          <p class="convidado-numero">Convidado 1</p>
+          <label class="campo-label">Nome completo</label>
+          <input type="text" class="campo-input campo-nome" placeholder="Seu nome completo">
+          <label class="campo-label">E-mail</label>
+          <input type="email" class="campo-input campo-email" placeholder="seu@email.com">
+        </div>
+      </div>
+
+      <button class="btn-adicionar" onclick="adicionarConvidado()">+ Adicionar outra pessoa</button>
+      <button class="btn-confirmar" onclick="confirmarPresenca()" id="btn-confirmar">Confirmar Presença</button>
+    </div>
+
+    <div class="msg-sucesso" id="msg-sucesso">
+      <div class="msg-sucesso-icone">🌿</div>
+      <p class="msg-sucesso-titulo">Presença Confirmada!</p>
+      <p style="color:var(--texto-claro); font-size:15px; line-height:1.8;">
+        Que alegria! Você receberá um e-mail de confirmação em breve.<br>
+        Nos vemos em 24 de julho! 💚
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PRESENTES ════ -->
+<div id="page-presentes" class="page">
+  <div class="secao">
+    <h2 class="secao-titulo">Lista de Presentes</h2>
+    <div class="divisor"><span>🌿</span></div>
+    <p class="secao-sub">Sua presença já é o maior presente. Para quem desejar nos presentear, escolha um item abaixo e realize a transferência via Pix.</p>
+    <div id="lista-presentes" class="loading">Carregando lista...</div>
+  </div>
+</div>
+
+<!-- ════ TURISMO ════ -->
+<div id="page-turismo" class="page">
+  <div class="secao">
+    <h2 class="secao-titulo">Belo Horizonte</h2>
+    <div class="divisor"><span>🌿</span></div>
+    <p class="secao-sub">Dicas para aproveitar a cidade antes ou depois do casamento</p>
+
+    <div class="dica-card">
+      <div class="dica-icone">🏛️</div>
+      <div>
+        <span class="dica-tag">Cultura</span>
+        <p class="dica-titulo">Praça da Liberdade</p>
+        <p class="dica-texto">Um dos cartões-postais da cidade, cercada de museus como o Museu das Minas e do Metal e o Museu Mineiro. Ótima para um passeio cultural ao ar livre, especialmente aos finais de semana com a feira de artesanato.</p>
+      </div>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-icone">🍺</div>
+      <div>
+        <span class="dica-tag">Gastronomia</span>
+        <p class="dica-titulo">Savassi & Lourdes</p>
+        <p class="dica-texto">Os bairros mais badalados para comer e beber bem. Restaurantes de todos os estilos, bares de boteco e a famosa culinária mineira. Imperdível o pão de queijo fresquinho e o feijão tropeiro!</p>
+      </div>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-icone">🌿</div>
+      <div>
+        <span class="dica-tag">Natureza</span>
+        <p class="dica-titulo">Parque das Mangabeiras</p>
+        <p class="dica-texto">Uma verdadeira floresta urbana com vista panorâmica da cidade. Ideal para uma caminhada tranquila, piquenique e contemplação da Serra do Curral — símbolo de BH.</p>
+      </div>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-icone">🎨</div>
+      <div>
+        <span class="dica-tag">Arte</span>
+        <p class="dica-titulo">Circuito Cultural Praça da Estação</p>
+        <p class="dica-texto">Região que concentra museus, espaços culturais e a famosa feirinha de antiguidades aos domingos. Uma imersão na história e arte de BH.</p>
+      </div>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-icone">✈️</div>
+      <div>
+        <span class="dica-tag">Passeio</span>
+        <p class="dica-titulo">Ouro Preto — a 100km</p>
+        <p class="dica-texto">Para quem tiver um dia a mais, Ouro Preto é uma das cidades históricas mais bonitas do Brasil. Patrimônio da UNESCO, com igrejas barrocas, museus e paisagens de tirar o fôlego.</p>
+      </div>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-icone">🛏️</div>
+      <div>
+        <span class="dica-tag">Hospedagem</span>
+        <p class="dica-titulo">Onde se hospedar</p>
+        <p class="dica-texto">Recomendamos os bairros Savassi, Lourdes ou Funcionários — bem localizados, com ótimas opções de hotéis e fácil acesso ao local do casamento via app de transporte.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ MODAL QR ════ -->
+<div class="modal-overlay" id="modal-qr">
+  <div class="modal">
+    <button class="modal-fechar" onclick="fecharModal()">×</button>
+    <p class="modal-titulo" id="modal-presente-nome"></p>
+    <p class="modal-sub" id="modal-presente-valor"></p>
+    <div class="modal-qr" id="modal-qr-container">
+      <p style="color:var(--texto-claro); font-size:13px; padding:20px; text-align:center;">Carregando QR Code...</p>
+    </div>
+    <p class="modal-instrucao">Abra o aplicativo do seu banco<br>e escaneie o código para realizar o Pix 💚</p>
+  </div>
+</div>
+
+<footer>
+  <p>Luiza & Henrique · 24 · 07 · 26</p>
+  <p style="margin-top:6px;">Anella Spazio Eventi · Belo Horizonte, MG</p>
+</footer>
+
+<script>
+  let contadorConvidados = 1;
+  let qrCodeUrl = '';
+
+  // ── Carrega dados ao iniciar ──
+  window.onload = function () {
+    carregarPresentes();
+    carregarQrCode();
+  };
+
+  // ── NAVEGAÇÃO ──
+  function mudarPagina(pagina, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + pagina).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── ADICIONAR CONVIDADO ──
+  function adicionarConvidado() {
+    contadorConvidados++;
+    const div = document.createElement('div');
+    div.className = 'convidado-grupo';
+    div.id = 'convidado-' + contadorConvidados;
+    div.innerHTML = `
+      <p class="convidado-numero">Convidado ${contadorConvidados}</p>
+      <button class="btn-remover" onclick="removerConvidado('convidado-${contadorConvidados}')">×</button>
+      <label class="campo-label">Nome completo</label>
+      <input type="text" class="campo-input campo-nome" placeholder="Nome completo">
+      <label class="campo-label">E-mail</label>
+      <input type="email" class="campo-input campo-email" placeholder="email@exemplo.com">
+    `;
+    document.getElementById('lista-convidados').appendChild(div);
+  }
+
+  function removerConvidado(id) {
+    document.getElementById(id).remove();
+  }
+
+  // ── CONFIRMAR PRESENÇA ──
+  function confirmarPresenca() {
+    const grupos = document.querySelectorAll('.convidado-grupo');
+    const convidados = [];
+    let valido = true;
+
+    grupos.forEach(g => {
+      const nome = g.querySelector('.campo-nome').value.trim();
+      const email = g.querySelector('.campo-email').value.trim();
+      if (!nome || !email) { valido = false; return; }
+      convidados.push({ nome, email });
+    });
+
+    if (!valido) {
+      alert('Por favor, preencha o nome e e-mail de todos os convidados.');
+      return;
+    }
+
+    const btn = document.getElementById('btn-confirmar');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ convidados }),
+    })
+      .then(r => r.json())
+      .then(res => {
+        if (res.sucesso) {
+          document.getElementById('form-confirmacao').style.display = 'none';
+          document.getElementById('msg-sucesso').classList.add('visible');
+        } else {
+          alert('Erro ao confirmar. Tente novamente.');
+          btn.disabled = false;
+          btn.textContent = 'Confirmar Presença';
+        }
+      })
+      .catch(() => {
+        alert('Erro de conexão. Tente novamente.');
+        btn.disabled = false;
+        btn.textContent = 'Confirmar Presença';
+      });
+  }
+
+  // ── PRESENTES ──
+  function carregarPresentes() {
+    fetch(API_URL + '?acao=presentes')
+      .then(r => r.json())
+      .then(presentes => {
+        const container = document.getElementById('lista-presentes');
+        if (!presentes || presentes.length === 0) {
+          container.innerHTML = '<p style="text-align:center; color:var(--texto-claro); font-style:italic;">Lista em breve...</p>';
+          return;
+        }
+        container.className = 'presentes-grid';
+        container.innerHTML = presentes.map(p => `
+          <div class="presente-card" onclick="abrirModal('${p.nome}', '${formatarValor(p.valor)}')">
+            <p class="presente-nome">${p.nome}</p>
+            <p class="presente-valor">R$ ${formatarValor(p.valor)}</p>
+            <p class="presente-btn">Presentear via Pix →</p>
+          </div>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('lista-presentes').innerHTML =
+          '<p style="text-align:center; color:var(--texto-claro); font-style:italic;">Não foi possível carregar a lista.</p>';
+      });
+  }
+
+  function carregarQrCode() {
+    fetch(API_URL + '?acao=qrcode')
+      .then(r => r.json())
+      .then(data => { qrCodeUrl = data.url || ''; })
+      .catch(() => { qrCodeUrl = ''; });
+  }
+
+  function formatarValor(valor) {
+    return parseFloat(valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+  }
+
+  // ── MODAL ──
+  function abrirModal(nome, valor) {
+    document.getElementById('modal-presente-nome').textContent = nome;
+    document.getElementById('modal-presente-valor').textContent = 'R$ ' + valor;
+    const container = document.getElementById('modal-qr-container');
+    if (qrCodeUrl) {
+      container.innerHTML = `<img src="${qrCodeUrl}" alt="QR Code Pix">`;
+    } else {
+      container.innerHTML = `<p style="color:var(--texto-claro); font-size:13px; padding:20px; text-align:center;">📱<br>QR Code em breve</p>`;
+    }
+    document.getElementById('modal-qr').classList.add('open');
+  }
+
+  function fecharModal() {
+    document.getElementById('modal-qr').classList.remove('open');
+  }
+
+  document.getElementById('modal-qr').addEventListener('click', function (e) {
+    if (e.target === this) fecharModal();
+  });
+</script>
+</body>
+</html>
