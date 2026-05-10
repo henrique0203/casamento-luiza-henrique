@@ -331,7 +331,7 @@
 
 <script>
   // ════ SUBSTITUA PELA URL DO SEU APPS SCRIPT ════
-  const API_URL = 'https://script.google.com/macros/s/AKfycbyI-SfeT68WZqWp4f2vWIMkYCeaUvAPypBkUhaQ_RYEYaqZWFSW_InVdvFcrM-UpwNKGw/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyhVj41y9LJFySekCCuU3eKa7kWzNVIXif9dcXcOlMNTAGs6vm9BQiBF32rBfggfd3e7w/exec';
 </script>
 
 <header>
@@ -537,32 +537,29 @@
 
   // ── CONFIRMAR PRESENÇA ──
   function confirmarPresenca() {
-    const grupos = document.querySelectorAll('.convidado-grupo');
-    const convidados = [];
-    let valido = true;
+  const grupos = document.querySelectorAll('.convidado-grupo');
+  const convidados = [];
+  let valido = true;
 
-    grupos.forEach(g => {
-      const nome = g.querySelector('.campo-nome').value.trim();
-      const email = g.querySelector('.campo-email').value.trim();
-      if (!nome || !email) { valido = false; return; }
-      convidados.push({ nome, email });
-    });
+  grupos.forEach(g => {
+    const nome = g.querySelector('.campo-nome').value.trim();
+    const email = g.querySelector('.campo-email').value.trim();
+    if (!nome || !email) { valido = false; return; }
+    convidados.push({ nome, email });
+  });
 
-    if (!valido) {
-      alert('Por favor, preencha o nome e e-mail de todos os convidados.');
-      return;
-    }
+  if (!valido) {
+    alert('Por favor, preencha o nome e e-mail de todos os convidados.');
+    return;
+  }
 
-    const btn = document.getElementById('btn-confirmar');
-    btn.disabled = true;
-    btn.textContent = 'Enviando...';
+  const btn = document.getElementById('btn-confirmar');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
 
-    fetch(API_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ convidados }),
-    })
+  const url = API_URL + '?acao=confirmar&convidados=' + encodeURIComponent(JSON.stringify(convidados));
+
+  fetch(url, { mode: 'no-cors' })
     .then(() => {
       document.getElementById('form-confirmacao').style.display = 'none';
       document.getElementById('msg-sucesso').classList.add('visible');
@@ -572,7 +569,7 @@
       btn.disabled = false;
       btn.textContent = 'Confirmar Presença';
     });
-  }
+}
 
   // ── PRESENTES ──
   function carregarPresentes() {
