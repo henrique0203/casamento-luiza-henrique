@@ -411,7 +411,7 @@
   <div class="secao">
     <h2 class="secao-titulo">Lista de Presentes</h2>
     <div class="divisor"><span>🌿</span></div>
-    <p class="secao-sub">Sua presença já é o maior presente. Para quem desejar nos presentear, escolha um item abaixo e realize a transferência via Pix.</p>
+    <p class="secao-sub">Sua presença já é o maior presente. Para quem mesmo assim desejar nos presentear com algo a mais, deixamos algumas sugestões com carinho.</p>
     <div id="lista-presentes" class="loading">Carregando lista...</div>
   </div>
 </div>
@@ -485,26 +485,32 @@
     <button class="modal-fechar" onclick="fecharModal()">×</button>
     <p class="modal-titulo" id="modal-presente-nome"></p>
     <p class="modal-sub" id="modal-presente-valor"></p>
+
+    <div style="background:var(--bege); border:1px solid var(--bege-escuro); border-radius:4px; padding:16px; margin-bottom:20px;">
+      <p style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--texto-claro); margin-bottom:8px;">Chave Pix</p>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <code id="chave-pix" style="font-size:12px; color:var(--texto); word-break:break-all; flex:1;">303af744-8973-4a63-b027-76d9bf5dcacd</code>
+        <button onclick="copiarPix()" id="btn-copiar" style="
+          background:var(--verde);
+          color:var(--branco);
+          border:none;
+          padding:8px 14px;
+          font-family:'EB Garamond',serif;
+          font-size:13px;
+          border-radius:2px;
+          cursor:pointer;
+          white-space:nowrap;
+          flex-shrink:0;
+        ">Copiar</button>
+      </div>
+    </div>
+
     <div class="modal-qr" id="modal-qr-container">
       <p style="color:var(--texto-claro); font-size:13px; padding:20px; text-align:center;">Carregando...</p>
     </div>
-    <p class="modal-instrucao">Abra o aplicativo do seu banco<br>e escaneie o código para realizar o Pix 💚</p>
+    <p class="modal-instrucao">Abra o aplicativo do seu banco<br>e escaneie o código ou cole a chave Pix 💚</p>
   </div>
 </div>
-
-<footer>
-  <p>Luiza & Henrique · 24 · 07 · 26</p>
-  <p style="margin-top:6px;">Anella Spazio Eventi · Belo Horizonte, MG</p>
-</footer>
-
-<script>
-  let contadorConvidados = 1;
-  let qrCodeUrl = '';
-
-  window.onload = function () {
-    carregarPresentes();
-    carregarQrCode();
-  };
 
   // ── NAVEGAÇÃO ──
   function mudarPagina(pagina, btn) {
@@ -586,7 +592,7 @@
           <div class="presente-card" onclick="abrirModal('${escapar(p.nome)}', '${formatarValor(p.valor)}')">
             <p class="presente-nome">${p.nome}</p>
             <p class="presente-valor">R$ ${formatarValor(p.valor)}</p>
-            <p class="presente-btn">Presentear via Pix →</p>
+            <p class="presente-btn">Presentear →</p>
           </div>
         `).join('');
       })
@@ -632,6 +638,22 @@
   document.getElementById('modal-qr').addEventListener('click', function (e) {
     if (e.target === this) fecharModal();
   });
+
+function copiarPix() {
+  const chave = document.getElementById('chave-pix').textContent;
+  navigator.clipboard.writeText(chave).then(() => {
+    const btn = document.getElementById('btn-copiar');
+    btn.textContent = 'Copiado!';
+    btn.style.background = 'var(--verde-claro)';
+    setTimeout(() => {
+      btn.textContent = 'Copiar';
+      btn.style.background = 'var(--verde)';
+    }, 2000);
+  }).catch(() => {
+    alert('Chave Pix: 303af744-8973-4a63-b027-76d9bf5dcacd');
+  });
+}
+  
 </script>
 </body>
 </html>
