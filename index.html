@@ -27,7 +27,6 @@
       min-height: 100vh;
     }
 
-    /* ── HEADER ── */
     header {
       background: var(--branco);
       border-bottom: 1px solid var(--bege-escuro);
@@ -89,7 +88,6 @@
     nav button.active { color: var(--verde); }
     nav button.active::after { width: 80%; }
 
-    /* ── PÁGINAS ── */
     .page { display: none; animation: fadeIn 0.5s ease; }
     .page.active { display: block; }
 
@@ -98,7 +96,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── HERO ── */
     .hero {
       text-align: center;
       padding: 60px 20px 40px;
@@ -124,7 +121,6 @@
       margin: 20px 0;
     }
 
-    /* ── INFO CARDS ── */
     .info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -146,7 +142,6 @@
     .info-card-titulo { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--marrom-claro); margin-bottom: 8px; }
     .info-card-texto { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--texto); line-height: 1.5; }
 
-    /* ── SEÇÃO ── */
     .secao { max-width: 680px; margin: 0 auto; padding: 50px 20px; }
 
     .secao-titulo {
@@ -165,7 +160,6 @@
     .divisor::before, .divisor::after { content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--marrom-claro); }
     .divisor span { color: var(--marrom-claro); font-size: 14px; }
 
-    /* ── FORMULÁRIO ── */
     .convidado-grupo {
       background: var(--bege);
       border: 1px solid var(--bege-escuro);
@@ -195,7 +189,13 @@
 
     .campo-input:focus { border-color: var(--verde-claro); }
 
-    .btn-remover { position: absolute; top: 12px; right: 12px; background: none; border: none; color: var(--marrom-claro); cursor: pointer; font-size: 18px; }
+    .btn-remover {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: none; border: none;
+      color: var(--marrom-claro);
+      cursor: pointer; font-size: 18px;
+    }
 
     .btn-adicionar {
       width: 100%;
@@ -232,14 +232,26 @@
     .btn-confirmar:hover { background: var(--verde-claro); }
     .btn-confirmar:disabled { background: var(--marrom-claro); cursor: not-allowed; }
 
-    /* ── MENSAGEM SUCESSO ── */
-    .msg-sucesso { display: none; text-align: center; padding: 40px 20px; background: var(--bege); border: 1px solid var(--bege-escuro); border-radius: 2px; margin-top: 20px; }
+    .msg-sucesso {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--bege);
+      border: 1px solid var(--bege-escuro);
+      border-radius: 2px;
+      margin-top: 20px;
+    }
+
     .msg-sucesso.visible { display: block; }
     .msg-sucesso-icone { font-size: 40px; margin-bottom: 16px; }
     .msg-sucesso-titulo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; color: var(--verde); margin-bottom: 12px; }
 
-    /* ── PRESENTES ── */
-    .presentes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
+    .presentes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
 
     .presente-card {
       background: var(--bege);
@@ -257,20 +269,48 @@
     .presente-valor { font-size: 13px; color: var(--verde); letter-spacing: 1px; }
     .presente-btn { margin-top: 12px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--marrom-claro); }
 
-    /* ── MODAL QR ── */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(58,46,34,0.6); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(58,46,34,0.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
     .modal-overlay.open { display: flex; }
 
-    .modal { background: var(--branco); border-radius: 2px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; position: relative; }
+    .modal {
+      background: var(--branco);
+      border-radius: 2px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
     .modal-fechar { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 22px; color: var(--texto-claro); cursor: pointer; }
     .modal-titulo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; color: var(--verde); margin-bottom: 8px; }
     .modal-sub { font-size: 13px; color: var(--texto-claro); margin-bottom: 24px; }
 
-    .modal-qr { width: 200px; height: 200px; margin: 0 auto 20px; background: var(--bege); border: 1px solid var(--bege-escuro); display: flex; align-items: center; justify-content: center; border-radius: 2px; overflow: hidden; }
+    .modal-qr {
+      width: 200px; height: 200px;
+      margin: 0 auto 20px;
+      background: var(--bege);
+      border: 1px solid var(--bege-escuro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
     .modal-qr img { width: 100%; height: 100%; object-fit: contain; }
     .modal-instrucao { font-size: 13px; color: var(--texto-claro); line-height: 1.8; }
 
-    /* ── TURISMO ── */
     .dica-card { display: flex; gap: 20px; background: var(--bege); border: 1px solid var(--bege-escuro); border-radius: 2px; padding: 24px; margin-bottom: 16px; align-items: flex-start; }
     .dica-icone { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
     .dica-titulo { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--verde); margin-bottom: 6px; }
@@ -289,8 +329,8 @@
 </head>
 <body>
 
-<!-- ════ IMPORTANTE: substitua pela URL do seu Apps Script ════ -->
 <script>
+  // ════ SUBSTITUA PELA URL DO SEU APPS SCRIPT ════
   const API_URL = 'https://script.google.com/macros/s/AKfycbyI-SfeT68WZqWp4f2vWIMkYCeaUvAPypBkUhaQ_RYEYaqZWFSW_InVdvFcrM-UpwNKGw/exec';
 </script>
 
@@ -351,9 +391,8 @@
           <input type="email" class="campo-input campo-email" placeholder="seu@email.com">
         </div>
       </div>
-
       <button class="btn-adicionar" onclick="adicionarConvidado()">+ Adicionar outra pessoa</button>
-      <button class="btn-confirmar" onclick="confirmarPresenca()" id="btn-confirmar">Confirmar Presença</button>
+      <button class="btn-confirmar" id="btn-confirmar" onclick="confirmarPresenca()">Confirmar Presença</button>
     </div>
 
     <div class="msg-sucesso" id="msg-sucesso">
@@ -447,7 +486,7 @@
     <p class="modal-titulo" id="modal-presente-nome"></p>
     <p class="modal-sub" id="modal-presente-valor"></p>
     <div class="modal-qr" id="modal-qr-container">
-      <p style="color:var(--texto-claro); font-size:13px; padding:20px; text-align:center;">Carregando QR Code...</p>
+      <p style="color:var(--texto-claro); font-size:13px; padding:20px; text-align:center;">Carregando...</p>
     </div>
     <p class="modal-instrucao">Abra o aplicativo do seu banco<br>e escaneie o código para realizar o Pix 💚</p>
   </div>
@@ -462,7 +501,6 @@
   let contadorConvidados = 1;
   let qrCodeUrl = '';
 
-  // ── Carrega dados ao iniciar ──
   window.onload = function () {
     carregarPresentes();
     carregarQrCode();
@@ -476,7 +514,7 @@
     btn.classList.add('active');
   }
 
-  // ── ADICIONAR CONVIDADO ──
+  // ── CONVIDADOS ──
   function adicionarConvidado() {
     contadorConvidados++;
     const div = document.createElement('div');
@@ -499,43 +537,42 @@
 
   // ── CONFIRMAR PRESENÇA ──
   function confirmarPresenca() {
-  const grupos = document.querySelectorAll('.convidado-grupo');
-  const convidados = [];
-  let valido = true;
+    const grupos = document.querySelectorAll('.convidado-grupo');
+    const convidados = [];
+    let valido = true;
 
-  grupos.forEach(g => {
-    const nome = g.querySelector('.campo-nome').value.trim();
-    const email = g.querySelector('.campo-email').value.trim();
-    if (!nome || !email) { valido = false; return; }
-    convidados.push({ nome, email });
-  });
+    grupos.forEach(g => {
+      const nome = g.querySelector('.campo-nome').value.trim();
+      const email = g.querySelector('.campo-email').value.trim();
+      if (!nome || !email) { valido = false; return; }
+      convidados.push({ nome, email });
+    });
 
-  if (!valido) {
-    alert('Por favor, preencha o nome e e-mail de todos os convidados.');
-    return;
+    if (!valido) {
+      alert('Por favor, preencha o nome e e-mail de todos os convidados.');
+      return;
+    }
+
+    const btn = document.getElementById('btn-confirmar');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    fetch(API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ convidados }),
+    })
+    .then(() => {
+      document.getElementById('form-confirmacao').style.display = 'none';
+      document.getElementById('msg-sucesso').classList.add('visible');
+    })
+    .catch(() => {
+      alert('Erro de conexão. Tente novamente.');
+      btn.disabled = false;
+      btn.textContent = 'Confirmar Presença';
+    });
   }
-
-  const btn = document.getElementById('btn-confirmar');
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
-
-  fetch(API_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ convidados }),
-  })
-  .then(() => {
-    // Com no-cors assumimos sucesso após o envio
-    document.getElementById('form-confirmacao').style.display = 'none';
-    document.getElementById('msg-sucesso').classList.add('visible');
-  })
-  .catch(() => {
-    alert('Erro de conexão. Tente novamente.');
-    btn.disabled = false;
-    btn.textContent = 'Confirmar Presença';
-  });
-}
 
   // ── PRESENTES ──
   function carregarPresentes() {
@@ -549,7 +586,7 @@
         }
         container.className = 'presentes-grid';
         container.innerHTML = presentes.map(p => `
-          <div class="presente-card" onclick="abrirModal('${p.nome}', '${formatarValor(p.valor)}')">
+          <div class="presente-card" onclick="abrirModal('${escapar(p.nome)}', '${formatarValor(p.valor)}')">
             <p class="presente-nome">${p.nome}</p>
             <p class="presente-valor">R$ ${formatarValor(p.valor)}</p>
             <p class="presente-btn">Presentear via Pix →</p>
@@ -571,6 +608,11 @@
 
   function formatarValor(valor) {
     return parseFloat(valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+  }
+
+  // Evita quebra no onclick com nomes que tenham aspas
+  function escapar(str) {
+    return str.replace(/'/g, "\\'");
   }
 
   // ── MODAL ──
@@ -595,4 +637,5 @@
   });
 </script>
 </body>
+</html>
 </html>
