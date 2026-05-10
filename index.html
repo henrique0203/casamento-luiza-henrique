@@ -291,7 +291,7 @@
 
 <!-- ════ IMPORTANTE: substitua pela URL do seu Apps Script ════ -->
 <script>
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxaOLFxyiwQufT9diJMQraXdwNMFX112e1305hRtLdwz0yCEFzaJo5-gxer1Ov4M0RPyg/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyI-SfeT68WZqWp4f2vWIMkYCeaUvAPypBkUhaQ_RYEYaqZWFSW_InVdvFcrM-UpwNKGw/exec';
 </script>
 
 <header>
@@ -520,26 +520,20 @@
     btn.textContent = 'Enviando...';
 
     fetch(API_URL, {
-      method: 'POST',
-      body: JSON.stringify({ convidados }),
-    })
-      .then(r => r.json())
-      .then(res => {
-        if (res.sucesso) {
-          document.getElementById('form-confirmacao').style.display = 'none';
-          document.getElementById('msg-sucesso').classList.add('visible');
-        } else {
-          alert('Erro ao confirmar. Tente novamente.');
-          btn.disabled = false;
-          btn.textContent = 'Confirmar Presença';
-        }
-      })
-      .catch(() => {
-        alert('Erro de conexão. Tente novamente.');
-        btn.disabled = false;
-        btn.textContent = 'Confirmar Presença';
-      });
-  }
+  method: 'POST',
+  mode: 'no-cors',
+  headers: { 'Content-Type': 'text/plain' },
+  body: JSON.stringify({ convidados }),
+})
+  .then(() => {
+    document.getElementById('form-confirmacao').style.display = 'none';
+    document.getElementById('msg-sucesso').classList.add('visible');
+  })
+  .catch(err => {
+    alert('Erro de conexão: ' + err.message);
+    btn.disabled = false;
+    btn.textContent = 'Confirmar Presença';
+  });
 
   // ── PRESENTES ──
   function carregarPresentes() {
