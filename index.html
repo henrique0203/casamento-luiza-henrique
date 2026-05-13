@@ -613,38 +613,28 @@
   };
 
   // ── MÚSICA ──
-  function iniciarMusica() {
-    const audio = document.getElementById('musica-fundo');
-    audio.muted = true;
-    audio.play().then(() => {
-      document.body.addEventListener('click', function desmutar() {
-        audio.muted = false;
-        musicaTocando = true;
-        document.getElementById('btn-musica').textContent = '||';
-        document.getElementById('btn-musica').style.background = 'var(--verde-claro)';
-        document.body.removeEventListener('click', desmutar);
-      }, { once: true });
-    }).catch(() => {
-      musicaTocando = false;
-    });
-  }
+ function iniciarMusica() {
+  // Sem autoplay — usuário inicia pelo botão ♪
+}
 
-  function toggleMusica() {
-    const audio = document.getElementById('musica-fundo');
-    const btn = document.getElementById('btn-musica');
-    if (musicaTocando) {
-      audio.pause();
-      btn.style.background = 'var(--verde)';
-      btn.textContent = '♪';
-      musicaTocando = false;
-    } else {
-      audio.muted = false;
-      audio.play();
+function toggleMusica() {
+  const audio = document.getElementById('musica-fundo');
+  const btn = document.getElementById('btn-musica');
+  if (musicaTocando) {
+    audio.pause();
+    btn.style.background = 'var(--verde)';
+    btn.textContent = '♪';
+    musicaTocando = false;
+  } else {
+    audio.play().then(() => {
       btn.style.background = 'var(--verde-claro)';
       btn.textContent = '||';
       musicaTocando = true;
-    }
+    }).catch(() => {
+      alert('Não foi possível tocar a música.');
+    });
   }
+}
 
   // ── NAVEGAÇÃO ──
   function mudarPagina(pagina, btn) {
