@@ -512,6 +512,10 @@
   window.onload = function () {
     carregarPresentes();
     carregarQrCode();
+    // ── MÚSICA ──
+  const audio = document.getElementById('musica-fundo');
+  audio.muted = true;
+  audio.play().catch(() => {});
   };
 
   // ── NAVEGAÇÃO ──
@@ -655,6 +659,46 @@
       alert('Chave Pix: 303af744-8973-4a63-b027-76d9bf5dcacd');
     });
   }
+
+// ── MÚSICA ──
+let musicaTocando = false;
+
+// Tenta tocar automaticamente (mutado para burlar bloqueio do navegador)
+window.addEventListener('load', function() {
+  const audio = document.getElementById('musica-fundo');
+  audio.muted = true;
+  audio.play().then(() => {
+    // Assim que o usuário tocar na tela, desmuta
+    document.body.addEventListener('click', function desmutar() {
+      audio.muted = false;
+      musicaTocando = true;
+      document.getElementById('btn-musica').textContent = '||';
+      document.getElementById('btn-musica').style.background = 'var(--verde-claro)';
+      document.body.removeEventListener('click', desmutar);
+    }, { once: true });
+  }).catch(() => {
+    // Se falhar, aguarda o usuário clicar no botão
+    musicaTocando = false;
+  });
+});
+
+function toggleMusica() {
+  const audio = document.getElementById('musica-fundo');
+  const btn = document.getElementById('btn-musica');
+  if (musicaTocando) {
+    audio.pause();
+    btn.style.background = 'var(--verde)';
+    btn.textContent = '♪';
+    musicaTocando = false;
+  } else {
+    audio.muted = false;
+    audio.play();
+    btn.style.background = 'var(--verde-claro)';
+    btn.textContent = '||';
+    musicaTocando = true;
+  }
+}
+  
 </script>
 </body>
 </html>
